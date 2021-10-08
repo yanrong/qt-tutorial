@@ -30,3 +30,14 @@
 *.exe
 *.out
 *.app
+
+# add for qt project
+
+*.qmake.stash
+*.pro.swp
+*.pro
+*.pro.user
+*.moc_*
+
+
+.gitignore
