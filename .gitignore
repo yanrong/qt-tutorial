@@ -37,7 +37,10 @@
 *.pro.swp
 *.pro
 *.pro.user
-*.moc_*
+moc_*.cpp
+moc_*.h
+
+MakeFile
 
 
 .gitignore
