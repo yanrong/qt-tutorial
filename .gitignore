@@ -39,8 +39,8 @@
 *.pro.user
 moc_*.cpp
 moc_*.h
-
-MakeFile
-
+*.pro.user.*
+Makefile
+qrc_*.cpp
 
 .gitignore
