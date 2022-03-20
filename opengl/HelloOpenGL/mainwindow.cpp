@@ -55,4 +55,5 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
+    paintGL();
 }
