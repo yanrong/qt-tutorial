@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/openglwidget.vert</file>
+        <file>shaders/openglwidget.frag</file>
+    </qresource>
+</RCC>
