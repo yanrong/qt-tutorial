@@ -35,7 +35,6 @@
 
 *.qmake.stash
 *.pro.swp
-*.pro
 *.pro.user
 moc_*.cpp
 moc_*.h
@@ -43,4 +42,3 @@ moc_*.h
 Makefile
 qrc_*.cpp
 
-.gitignore

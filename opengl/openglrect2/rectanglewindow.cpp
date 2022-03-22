@@ -1,8 +1,5 @@
 #include "rectanglewindow.h"
-#include <QSurfaceFormat>
 #include <QDebug>
-#include <QColor>
-#include <vector>
 #include <GL/gl.h>
 
 RectangleWindow::RectangleWindow()
@@ -15,7 +12,7 @@ RectangleWindow::RectangleWindow()
 
     m_vertexColors = {QColor(0xf6a509), QColor(0xcb2dde),
                       QColor(0x0eeed1), QColor(0x068918)};
-    m_frameCount = 0;
+    m_frameCount = 5000;
     m_program = nullptr;
 }
 
@@ -60,10 +57,10 @@ void RectangleWindow::initializeGL()
     };
 
     //create buffer to assemble the vertex indices and vertex color
-    m_vertexBufferData.resize(2 * 4 * 3);
+    m_vertexBufferData.resize(2 * 3 * 4);
     GLfloat* buf = m_vertexBufferData.data();
 
-    //the data totoal have 4 liens, each line contain 6 element,
+    //the data totoal have 4 lines in the buffer array, each line contain 6 element,
     //3 vertex indices and 3 vertex color, copy data with pattern v1v2v3c1c2c3
     for (int i = 0; i < 4; i++, buf += 6) {
         //coordinates
@@ -122,6 +119,8 @@ void RectangleWindow::paintGL()
     glDrawElements(GL_TRIANGLES, 6 , GL_UNSIGNED_INT, nullptr);
     //finally relase VAO again
     m_vao.release();
+
+    animate();
 }
 
 void RectangleWindow::updateScene()
@@ -143,4 +142,38 @@ void RectangleWindow::updateScene()
 
     //request an update
     update();
+}
+
+void RectangleWindow::animateColorsTo(const std::vector<QColor>& toColors)
+{
+    m_fromColors = m_vertexColors;
+    m_toColors = toColors;
+    m_frameCount = 0;
+
+    animate();
+}
+
+void RectangleWindow::animate()
+{
+    const unsigned int FRMAMECOUNT = 120;
+    //if already at framecount end, stop
+    if (++m_frameCount > FRMAMECOUNT) {
+        return ;//stop the frame rendering
+    }
+    //update colors
+    double alpha = double(m_frameCount) / FRMAMECOUNT;
+
+    //linear blending in HSV space
+    for (unsigned int i = 0; i < m_vertexColors.size(); i++) {
+        double fromH, fromS, fromV;
+        m_fromColors[i].getHsvF(&fromH, &fromS, &fromV);
+        double toH, toS, toV;
+        m_toColors[i].getHsvF(&toH, &toS, &toV);
+
+        m_vertexColors[i] = QColor::fromHsvF(toH * alpha + fromH * (1 - alpha),
+                                             toS * alpha + fromS * (1 - alpha),
+                                             toV * alpha + fromV * (1 - alpha));
+    }
+
+    updateScene();
 }

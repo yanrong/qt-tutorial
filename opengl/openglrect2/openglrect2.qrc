@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>shaders/openglrect.frag</file>
-        <file>shaders/openglrect.vert</file>
+        <file>shaders/openglrect2.frag</file>
+        <file>shaders/openglrect2.vert</file>
     </qresource>
 </RCC>

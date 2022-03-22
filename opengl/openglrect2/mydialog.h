@@ -7,6 +7,7 @@ class RectangleWindow;
 
 class MyDialog : public QDialog
 {
+    Q_OBJECT
 public:
     MyDialog();
 

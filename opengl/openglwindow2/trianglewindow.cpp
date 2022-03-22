@@ -22,13 +22,13 @@ void TriangleWindow::initialize()
 {
     m_program = new QOpenGLShaderProgram(this);
 
-    if(m_program->addCacheableShaderFromSourceFile(
+    if(!m_program->addCacheableShaderFromSourceFile(
                 QOpenGLShader::Vertex, ":/shaders/pass_through.vert"))
     {
         qDebug() << "Vertex shader errors: \n" << m_program->log();
     }
 
-    if(m_program->addCacheableShaderFromSourceFile(
+    if(!m_program->addCacheableShaderFromSourceFile(
                 QOpenGLShader::Fragment, ":/shaders/uniform_color.frag"))
     {
         qDebug() << "Fragment shader errors: \n" << m_program->log();

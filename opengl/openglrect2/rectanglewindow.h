@@ -5,10 +5,13 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
+#include <QSurfaceFormat>
+#include <QColor>
+#include <vector>
 
 /*
  * this class derive from high level QOpenGLWindow, and
- * inplement the virtual member function initializeGL()
+ * implement the virtual member function initializeGL()
  * and paintGL functions
  */
 class RectangleWindow : public QOpenGLWindow
@@ -32,7 +35,7 @@ private:
      * modifies the scene a bit and call updateScene afterwards, then
      * already in final state, dosen't do anything
      */
-    void aminate();
+    void animate();
 
     //QT wrap an OpenGL vertex array object
     QOpenGLVertexArrayObject m_vao;
@@ -46,7 +49,7 @@ private:
     //store the target colors that we animate towards
     std::vector<QColor> m_toColors;
     //store the target colors that we animate from
-    std::vector<QColor> m_fromeColors;
+    std::vector<QColor> m_fromColors;
 
     //number of frame used for the animate
     unsigned int m_frameCount;
